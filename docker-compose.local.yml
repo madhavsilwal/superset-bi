@@ -1,0 +1,36 @@
+x-local-env: &local-env
+  env_file: .env
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DATABASE_DB:-superset}
+      POSTGRES_USER: ${DATABASE_USER:-superset}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-superset}
+    volumes:
+      - db_home:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER:-superset} -d ${DATABASE_DB:-superset}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  superset-init:
+    <<: *local-env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  superset:
+    <<: *local-env
+
+  superset-worker:
+    <<: *local-env
+
+  superset-beat:
+    <<: *local-env
+
+volumes:
+  db_home:

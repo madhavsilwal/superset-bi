@@ -1,0 +1,30 @@
+x-prod-env: &prod-env
+  env_file: prod.env
+
+services:
+  superset-init:
+    <<: *prod-env
+
+  superset:
+    <<: *prod-env
+    deploy:
+      resources:
+        limits:
+          cpus: "3.5"
+          memory: 7000M
+
+  superset-worker:
+    <<: *prod-env
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4000M
+
+  superset-beat:
+    <<: *prod-env
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1000M

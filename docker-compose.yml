@@ -1,0 +1,69 @@
+x-logging: &logging
+  logging:
+    driver: json-file
+    options:
+      max-size: "50m"
+      max-file: "3"
+
+x-superset-build: &superset-build
+  build:
+    context: .
+    args:
+      SUPERSET_VERSION: ${SUPERSET_VERSION:-6.1.0}
+  image: superset-overlay:${SUPERSET_VERSION:-6.1.0}
+
+services:
+  redis:
+    <<: *logging
+    image: redis:8-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--maxmemory", "512mb", "--maxmemory-policy", "volatile-lru"]
+    volumes:
+      - redis_home:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  superset-init:
+    <<: [*superset-build, *logging]
+    command: ["bash", "/app/docker/superset-init.sh"]
+    restart: "no"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  superset:
+    <<: [*superset-build, *logging]
+    restart: unless-stopped
+    ports:
+      - "${SUPERSET_HOST_PORT:-8088}:${SUPERSET_PORT:-8088}"
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:${SUPERSET_PORT:-8088}/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+
+  superset-worker:
+    <<: [*superset-build, *logging]
+    restart: unless-stopped
+    command: ["celery", "--app=superset.tasks.celery_app:app", "worker", "-O", "fair", "-l", "INFO"]
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+
+  superset-beat:
+    <<: [*superset-build, *logging]
+    restart: unless-stopped
+    command: ["celery", "--app=superset.tasks.celery_app:app", "beat", "--pidfile=", "-s", "/tmp/celerybeat-schedule", "-l", "INFO"]
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+
+volumes:
+  redis_home:
