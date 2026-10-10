@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+
+# Environment & secrets
+.env
+*.env
+*.pem
+*.key
+
+# Docker & Compose files
+docker-compose*.yml
+.dockerignore
+
+# Documentation & repo metadata
+README.md
+docs/
+
+# Python cache & virtual environment
+__pycache__
+*.py[cod]
+*$py.class
+.venv
+venv
+ENV
+env
+.pytest_cache
+.mypy_cache
+.ruff_cache
+
+# OS & Editor
+.DS_Store
+.idea
+.vscode
+*.swp
+*.swo
+*~
