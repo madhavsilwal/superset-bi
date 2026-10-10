@@ -53,6 +53,8 @@ services:
     <<: [*superset-build, *logging]
     restart: unless-stopped
     command: ["celery", "--app=superset.tasks.celery_app:app", "worker", "-O", "fair", "-l", "INFO"]
+    healthcheck:
+      disable: true
     depends_on:
       superset-init:
         condition: service_completed_successfully
@@ -61,6 +63,8 @@ services:
     <<: [*superset-build, *logging]
     restart: unless-stopped
     command: ["celery", "--app=superset.tasks.celery_app:app", "beat", "--pidfile=", "-s", "/tmp/celerybeat-schedule", "-l", "INFO"]
+    healthcheck:
+      disable: true
     depends_on:
       superset-init:
         condition: service_completed_successfully

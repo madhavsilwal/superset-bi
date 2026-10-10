@@ -17,10 +17,29 @@ services:
       timeout: 5s
       retries: 5
 
+  source-db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    ports:
+      - "${SOURCE_DB_HOST_PORT:-5433}:5432"
+    environment:
+      POSTGRES_DB: ${SOURCE_DB_NAME:-analytics}
+      POSTGRES_USER: ${SOURCE_DB_USER:-analytics_user}
+      POSTGRES_PASSWORD: ${SOURCE_DB_PASSWORD:-analytics_password}
+    volumes:
+      - source_db_home:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${SOURCE_DB_USER:-analytics_user} -d ${SOURCE_DB_NAME:-analytics}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   superset-init:
     <<: *local-env
     depends_on:
       db:
+        condition: service_healthy
+      source-db:
         condition: service_healthy
 
   superset:
@@ -34,3 +53,4 @@ services:
 
 volumes:
   db_home:
+  source_db_home:

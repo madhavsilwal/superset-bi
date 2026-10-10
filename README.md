@@ -63,7 +63,7 @@ This repository decouples upstream Apache Superset from local configurations and
 ├── .env.example
 ├── Dockerfile
 ├── docker-compose.yml           # Base shared services (Redis, web, Celery worker, beat, init)
-├── docker-compose.local.yml     # Local dev overlay (containerized PostgreSQL metadata DB)
+├── docker-compose.local.yml     # Local dev overlay (PostgreSQL metadata DB + dedicated analytics source DB)
 ├── docker-compose.prod.yml      # Production cloud overlay (external DB, resource caps)
 ├── docker/
 │   └── superset-init.sh        # Idempotent DB migration and role sync script
@@ -111,6 +111,30 @@ curl http://localhost:8088/health
 Access Superset in your browser at `http://localhost:8088` with the credentials specified in `.env`:
 * **Username:** `admin` (or value of `ADMIN_USERNAME`)
 * **Password:** `admin` (or value of `ADMIN_PASSWORD`)
+
+### 3.4. Local Analytics Database & CSV Uploads
+A dedicated PostgreSQL service (`source-db`) is included in `docker-compose.local.yml` to serve as an isolated analytics data store, preventing uploaded files and user data from polluting Superset's metadata database.
+
+* **Connection Parameters for Superset UI:**
+  * **Database Type:** PostgreSQL
+  * **Host:** `source-db`
+  * **Port:** `5432`
+  * **Database Name:** `analytics`
+  * **Username:** `analytics_user`
+  * **Password:** `analytics_password`
+  * **SQLAlchemy URI:** `postgresql+psycopg2://analytics_user:analytics_password@source-db:5432/analytics`
+* **Host Access Port (from your Mac):** `5433` (accessible via DBeaver, TablePlus, or `psql` at `localhost:5433`)
+
+**Connecting via UI & Enabling File Uploads:**
+1. In Superset, go to **Settings** → **Database Connections** → **+ Database**.
+2. Select **PostgreSQL**, enter the connection details above, and test the connection.
+3. Open the **Advanced** tab → **Security** → check **"Allow file uploads to database"**.
+4. Click **Finish / Save**.
+
+**Uploading a CSV:**
+1. Click the **`+`** icon in the navbar → **Upload CSV to database**.
+2. Select your file, enter a table name, select the database connection, and click **Save**.
+3. Explore the resulting dataset under **Data** → **Datasets**.
 
 ---
 
