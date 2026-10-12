@@ -13,6 +13,9 @@ x-superset-build: &superset-build
   image: superset-overlay:${SUPERSET_VERSION:-6.1.0}
   env_file:
     - .env
+  volumes:
+    - ./overlay/superset_config.py:/app/pythonpath/superset_config.py:ro
+    - ./overlay/custom:/app/pythonpath/custom:ro
 
 services:
   redis:
@@ -41,9 +44,6 @@ services:
     restart: unless-stopped
     ports:
       - "${SUPERSET_HOST_PORT:-8088}:${SUPERSET_PORT:-8088}"
-    volumes:
-      - ./overlay/superset_config.py:/app/pythonpath/superset_config.py:ro
-      - ./overlay/custom:/app/pythonpath/custom:ro
     depends_on:
       superset-init:
         condition: service_completed_successfully
