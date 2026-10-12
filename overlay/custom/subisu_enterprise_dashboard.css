@@ -545,8 +545,8 @@
   transition: background-color 0.15s ease !important;
 }
 
-.ant-table-tbody > tr:hover > td,
-.table-condensed tbody > tr:hover > td,
+.ant-table-tbody > tr:hover > td:not([style*="color"]),
+.table-condensed tbody > tr:hover > td:not([style*="color"]),
 .ag-row-hover {
   background-color: #F1F5F9 !important;
 }
@@ -564,9 +564,9 @@
   text-overflow: ellipsis !important;
 }
 
-/* Zebra striping for wide tables */
-.ant-table-tbody > tr:nth-child(even) > td,
-.table-condensed tbody > tr:nth-child(even) > td {
+/* Zebra striping for wide tables (excluding cells with conditional formatting) */
+.ant-table-tbody > tr:nth-child(even) > td:not([style*="color"]),
+.table-condensed tbody > tr:nth-child(even) > td:not([style*="color"]) {
   background-color: #FAFBFC !important;
 }
 
