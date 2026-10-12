@@ -449,6 +449,13 @@
 .grid-row:has(.big_number_total) > div:nth-child(5) .header-line {
   color: var(--sb-positive) !important;
 }
+.grid-row:has(.big_number_total) > div:nth-child(5) .header-line::before {
+  content: "+NPR ";
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--sb-positive);
+  margin-right: 3px;
+}
 
 /* --- Card 6: Speed Upgrades (Purple border, Lightning icon) --- */
 .grid-row:has(.big_number_total) > div:nth-child(6) .dashboard-component-chart-holder {

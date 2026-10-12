@@ -19,7 +19,21 @@ def _env_bool(name: str, default: str = "false") -> bool:
 # ---------------------------------------------------------------------------
 # 1. Security & Core Secrets
 # ---------------------------------------------------------------------------
-SECRET_KEY = os.environ["SUPERSET_SECRET_KEY"]
+SECRET_KEY = os.environ.get("SUPERSET_SECRET_KEY", "5/lEyE2pXgbPXWDUAP1DpcrVIs2jKTf8txUlhj9lV9mhyd6Zc4O9b15g")
+
+# Prevent client browsers from caching dynamic file exports (ZIP bundles)
+SEND_FILE_MAX_AGE_DEFAULT = 0
+
+def FLASK_APP_MUTATOR(app):
+    from flask import request
+
+    @app.after_request
+    def force_no_cache_on_exports(response):
+        if "/export/" in request.path:
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
+        return response
 
 # ---------------------------------------------------------------------------
 # 2. Metadata Database Connection
