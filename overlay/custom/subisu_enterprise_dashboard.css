@@ -1,0 +1,558 @@
+/* ==========================================================================
+   SUBISU CABLENET BI - MASTER DASHBOARD STYLESHEET
+   Authenticated directly from Subisu official website (subisu.net.np)
+   Compatible with Apache Superset 3.x, 4.x, 5.x, 6.x
+   ========================================================================== */
+
+:root {
+  /* Subisu Official Brand Identity (subisu.net.np) */
+  --sb-primary: #1D479B;             /* Subisu Cobalt Blue */
+  --sb-primary-hover: #2A5FBF;
+  --sb-primary-subtle: #EEF3FA;
+  --sb-primary-border: #BDD1F2;
+
+  --sb-secondary: #C12161;           /* Subisu Crimson Berry */
+  --sb-secondary-subtle: #FDF2F6;
+  --sb-secondary-border: #F5C6D8;
+
+  /* Signature Gradients */
+  --sb-gradient: linear-gradient(90deg, #1D479B 0%, #C12161 100%);
+  --sb-gradient-reverse: linear-gradient(90deg, #C12161 0%, #1D479B 100%);
+
+  /* Semantic ISP Status Tokens */
+  --sb-positive: #16A34A;            /* Active, Renewals, Upgrades, Growth */
+  --sb-positive-subtle: #DCFCE7;
+  --sb-negative: #DC2626;            /* Churn, Plan Downgrades, Outages */
+  --sb-negative-subtle: #FEE2E2;
+  --sb-warning: #F59E0B;             /* Expiring (<3 Days), Threshold alerts */
+  --sb-info: #0284C7;                /* FTTH / Broadband Info */
+  --sb-purple: #7C3AED;              /* Speed Upgrades & Bandwidth */
+
+  /* Neutral Surface & Typography Palette */
+  --sb-canvas: #F8F9FA;              /* Crisp Subisu portal surface */
+  --sb-card-bg: #FFFFFF;
+  --sb-border: #E2E8F0;             /* 1px crisp card border */
+  --sb-border-subtle: #F1F5F9;
+
+  --sb-text-title: #0C0C0C;          /* Subisu .su-text-black */
+  --sb-text-body: #212529;           /* Subisu standard body */
+  --sb-text-muted: #6C757D;          /* Subisu secondary metadata */
+  --sb-text-caption: #94A3B8;
+
+  /* Geometry & Elevation */
+  --sb-radius-sm: 6px;
+  --sb-radius-md: 8px;
+  --sb-radius-lg: 12px;
+  --sb-shadow-card: 0 1px 3px 0 rgba(12, 12, 12, 0.04), 0 1px 2px -1px rgba(12, 12, 12, 0.04);
+  --sb-shadow-hover: 0 8px 16px -4px rgba(29, 71, 155, 0.10), 0 4px 6px -2px rgba(12, 12, 12, 0.04);
+  --sb-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   1. GLOBAL CANVAS & LAYOUT RESET
+   ========================================================================== */
+.dashboard,
+.dashboard-content,
+#dashboard-content {
+  background-color: var(--sb-canvas) !important;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  color: var(--sb-text-body) !important;
+  padding: 16px 20px 32px 20px !important;
+}
+
+.dashboard-component-chart-holder {
+  overflow: visible !important;
+}
+
+/* ==========================================================================
+   2. DASHBOARD HEADER & TITLE BAR
+   ========================================================================== */
+.dashboard-header,
+[data-test="dashboard-header"] {
+  background: transparent !important;
+  border-bottom: 1px solid var(--sb-border) !important;
+  padding: 12px 0 16px 0 !important;
+  margin-bottom: 16px !important;
+}
+
+.dashboard-header .header-title,
+[data-test="dashboard-header"] h1,
+.header-title-text {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: var(--sb-text-title) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.dashboard-header .button-container .ant-btn {
+  border-radius: var(--sb-radius-md) !important;
+  font-weight: 600 !important;
+  border-color: var(--sb-border) !important;
+  color: var(--sb-text-body) !important;
+  box-shadow: none !important;
+}
+
+.dashboard-header .button-container .ant-btn-primary {
+  background: var(--sb-primary) !important;
+  border-color: var(--sb-primary) !important;
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   3. NATIVE FILTER BAR (COMPACT & CLEAN)
+   ========================================================================== */
+.filter-bar,
+[data-test="filter-bar"] {
+  background: #FFFFFF !important;
+  border: 1px solid var(--sb-border) !important;
+  border-radius: var(--sb-radius-lg) !important;
+  box-shadow: var(--sb-shadow-card) !important;
+  padding: 12px !important;
+  margin-bottom: 16px !important;
+}
+
+.filter-bar-header,
+[data-test="filter-bar-header"] {
+  border-bottom: 1px solid var(--sb-border-subtle) !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 12px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--sb-text-title) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.filter-control-container,
+.filter-bar .ant-select-selector {
+  border-radius: var(--sb-radius-md) !important;
+  border-color: var(--sb-border) !important;
+  background-color: #FFFFFF !important;
+  font-size: 12.5px !important;
+  min-height: 32px !important;
+  transition: var(--sb-transition) !important;
+}
+
+.filter-bar .ant-select-focused .ant-select-selector {
+  border-color: var(--sb-primary) !important;
+  box-shadow: 0 0 0 2px var(--sb-primary-subtle) !important;
+}
+
+.filter-bar-actions .ant-btn {
+  border-radius: var(--sb-radius-md) !important;
+  height: 32px !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+}
+
+.filter-bar-actions .ant-btn-primary {
+  background: var(--sb-primary) !important;
+  border-color: var(--sb-primary) !important;
+}
+
+/* ==========================================================================
+   4. MARKDOWN EXECUTIVE BANNER (SEAMLESS OPEN BANNER WITH BLUE LEFT ACCENT)
+   ========================================================================== */
+.dashboard-markdown,
+.dashboard-markdown .dashboard-component-chart-holder,
+#MARKDOWN-header,
+.dragdroppable:has(.dashboard-markdown) .dashboard-component-chart-holder {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#MARKDOWN-header .dashboard-component-chart-holder {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-left: 4px solid var(--sb-primary) !important;
+  border-radius: 0 !important;
+  padding: 2px 0 2px 14px !important;
+  margin: 6px 0 16px 0 !important;
+}
+
+#MARKDOWN-header .dashboard-component-chart-holder div:first-child > div:first-child {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: var(--sb-text-title) !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 3px !important;
+}
+
+#MARKDOWN-header .dashboard-component-chart-holder div:first-child > div:last-child {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: var(--sb-text-muted) !important;
+  letter-spacing: normal !important;
+}
+
+/* ==========================================================================
+   5. GENERAL ANALYTICAL CHART CARDS
+   ========================================================================== */
+.dashboard-component-chart-holder {
+  background: var(--sb-card-bg) !important;
+  border: 1px solid var(--sb-border) !important;
+  border-radius: var(--sb-radius-lg) !important;
+  box-shadow: var(--sb-shadow-card) !important;
+  padding: 16px 18px !important;
+  margin-bottom: 16px !important;
+  transition: var(--sb-transition) !important;
+}
+
+.dashboard-component-chart-holder:hover {
+  box-shadow: var(--sb-shadow-hover) !important;
+  border-color: var(--sb-primary-border) !important;
+}
+
+.dashboard-component-chart-holder .header-title,
+.dashboard-component-chart-holder [data-test="slice-header"] {
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: var(--sb-text-title) !important;
+  letter-spacing: -0.01em !important;
+  padding: 0 0 8px 0 !important;
+  margin-bottom: 8px !important;
+  border-bottom: 1px solid var(--sb-border-subtle) !important;
+}
+
+.dashboard-component-chart-holder .slice_container {
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* ==========================================================================
+   6. EXECUTIVE KPI BIG NUMBER CARDS
+   ========================================================================== */
+/* Hide noisy three-dot menu and filter badges on KPI cards */
+.grid-row:has(.big_number_total) .header-controls,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) .header-controls,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number-total) .header-controls {
+  display: none !important;
+}
+
+/* Compact KPI Card Container */
+.grid-row:has(.big_number_total) > div .dashboard-component-chart-holder,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number),
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number-total) {
+  min-height: 112px !important;
+  max-height: 118px !important;
+  padding: 14px 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  border-left: 4px solid var(--sb-primary) !important; /* Default Blue */
+  transition: var(--sb-transition) !important;
+}
+
+.grid-row:has(.big_number_total) > div .dashboard-component-chart-holder:hover,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number):hover,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number-total):hover {
+  box-shadow: var(--sb-shadow-hover) !important;
+  border-color: var(--sb-primary-border) !important;
+}
+
+/* KPI Card Header / Title Row */
+.grid-row:has(.big_number_total) .header-title,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) .header-title,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number-total) .header-title {
+  border-bottom: none !important;
+  padding: 0 !important;
+  margin-bottom: 6px !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  color: #4B5563 !important;
+  letter-spacing: -0.01em !important;
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+}
+
+.grid-row:has(.big_number_total) .header-title a,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) .header-title a {
+  color: #4B5563 !important;
+  font-weight: 600 !important;
+}
+
+/* KPI Slice Containers and Sizing */
+.grid-row:has(.big_number_total) .dashboard-chart,
+.grid-row:has(.big_number_total) .chart-container,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) .dashboard-chart,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) .chart-container {
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+.grid-row:has(.big_number_total) .slice_container,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) .slice_container {
+  height: auto !important;
+  min-height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+.grid-row:has(.big_number_total) .slice_container > div,
+.grid-row:has(.big_number_total) .big_number_total,
+.grid-row:has(.big_number_total) .superset-legacy-chart-big-number,
+.grid-row:has(.big_number_total) .text-container,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) .superset-legacy-chart-big-number,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) .text-container {
+  width: 100% !important;
+  height: auto !important;
+  min-height: auto !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  overflow: visible !important;
+}
+
+/* The Big Number Metric */
+.grid-row:has(.big_number_total) .header-line,
+.superset-legacy-chart-big-number .header-line,
+.big-number-number {
+  font-size: 30px !important;
+  font-weight: 800 !important;
+  color: var(--sb-text-title) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.03em !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: baseline !important;
+  margin-top: 4px !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+/* --- Card 1: Renewals & Activations (Blue border, User icon) --- */
+.grid-row:has(.big_number_total) > div:nth-child(1) .dashboard-component-chart-holder {
+  border-left: 4px solid var(--sb-primary) !important;
+}
+.grid-row:has(.big_number_total) > div:nth-child(1) .header-title::before {
+  content: "👤";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  background: var(--sb-primary-subtle);
+  border-radius: 50%;
+  margin-right: 6px;
+  font-size: 11px;
+}
+
+/* --- Card 2: Total Contract Value (Blue border, Coin icon, NPR prefix) --- */
+.grid-row:has(.big_number_total) > div:nth-child(2) .dashboard-component-chart-holder {
+  border-left: 4px solid var(--sb-primary) !important;
+}
+.grid-row:has(.big_number_total) > div:nth-child(2) .header-title::before {
+  content: "🪙";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  background: #F3E8FF;
+  border-radius: 50%;
+  margin-right: 6px;
+  font-size: 11px;
+}
+.grid-row:has(.big_number_total) > div:nth-child(2) .header-line::before {
+  content: "NPR ";
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--sb-text-muted);
+  margin-right: 3px;
+}
+
+/* --- Card 3: Contract Revenue Change (Green border, Green delta, Arrow icon) --- */
+.grid-row:has(.big_number_total) > div:nth-child(3) .dashboard-component-chart-holder {
+  border-left: 4px solid var(--sb-positive) !important;
+}
+.grid-row:has(.big_number_total) > div:nth-child(3) .header-title::before {
+  content: "📈";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  background: var(--sb-positive-subtle);
+  border-radius: 50%;
+  margin-right: 6px;
+  font-size: 11px;
+}
+.grid-row:has(.big_number_total) > div:nth-child(3) .header-line {
+  color: var(--sb-positive) !important;
+}
+.grid-row:has(.big_number_total) > div:nth-child(3) .header-line::before {
+  content: "+NPR ";
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--sb-positive);
+  margin-right: 3px;
+}
+
+/* --- Card 4: Current Monthly ARPU (Blue border, Clock icon, NPR prefix) --- */
+.grid-row:has(.big_number_total) > div:nth-child(4) .dashboard-component-chart-holder {
+  border-left: 4px solid var(--sb-primary) !important;
+}
+.grid-row:has(.big_number_total) > div:nth-child(4) .header-title::before {
+  content: "⏱️";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  background: var(--sb-primary-subtle);
+  border-radius: 50%;
+  margin-right: 6px;
+  font-size: 11px;
+}
+.grid-row:has(.big_number_total) > div:nth-child(4) .header-line::before {
+  content: "NPR ";
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--sb-text-muted);
+  margin-right: 3px;
+}
+
+/* --- Card 5: Monthly ARPU Change (Green border, Green delta, Arrow icon) --- */
+.grid-row:has(.big_number_total) > div:nth-child(5) .dashboard-component-chart-holder {
+  border-left: 4px solid var(--sb-positive) !important;
+}
+.grid-row:has(.big_number_total) > div:nth-child(5) .header-title::before {
+  content: "📈";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  background: var(--sb-positive-subtle);
+  border-radius: 50%;
+  margin-right: 6px;
+  font-size: 11px;
+}
+.grid-row:has(.big_number_total) > div:nth-child(5) .header-line {
+  color: var(--sb-positive) !important;
+}
+
+/* --- Card 6: Speed Upgrades (Purple border, Lightning icon) --- */
+.grid-row:has(.big_number_total) > div:nth-child(6) .dashboard-component-chart-holder {
+  border-left: 4px solid var(--sb-purple) !important;
+}
+.grid-row:has(.big_number_total) > div:nth-child(6) .header-title::before {
+  content: "⚡";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  background: #F3E8FF;
+  border-radius: 50%;
+  margin-right: 6px;
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   7. NAVIGATION TABS (MODERN COBALT BLUE UNDERLINE)
+   ========================================================================== */
+.dashboard-component-tabs {
+  margin-bottom: 16px !important;
+}
+
+.dashboard-component-tabs .ant-tabs-nav {
+  margin-bottom: 18px !important;
+  border-bottom: 2px solid var(--sb-border) !important;
+}
+
+.dashboard-component-tabs .ant-tabs-tab {
+  padding: 10px 18px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: var(--sb-text-muted) !important;
+  transition: var(--sb-transition) !important;
+  margin-right: 4px !important;
+}
+
+.dashboard-component-tabs .ant-tabs-tab:hover {
+  color: var(--sb-primary-hover) !important;
+}
+
+.dashboard-component-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--sb-primary) !important;
+  font-weight: 700 !important;
+}
+
+.dashboard-component-tabs .ant-tabs-ink-bar {
+  background: var(--sb-primary) !important;
+  height: 3px !important;
+  border-radius: 2px !important;
+}
+
+/* ==========================================================================
+   8. DATA TABLES (COMPACT, STICKY HEADERS)
+   ========================================================================== */
+.table-condensed,
+.ant-table,
+.ag-theme-balham,
+.table {
+  border-radius: var(--sb-radius-md) !important;
+  border: 1px solid var(--sb-border) !important;
+  font-size: 12px !important;
+}
+
+.ant-table-thead > tr > th,
+.table-condensed thead > tr > th,
+.ag-header {
+  background-color: #F8F9FA !important;
+  color: #495057 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 9px 12px !important;
+  border-bottom: 1px solid var(--sb-border) !important;
+}
+
+.ant-table-tbody > tr > td,
+.table-condensed tbody > tr > td,
+.ag-row {
+  padding: 8px 12px !important;
+  color: var(--sb-text-body) !important;
+  border-bottom: 1px solid var(--sb-border-subtle) !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.ant-table-tbody > tr:hover > td,
+.table-condensed tbody > tr:hover > td,
+.ag-row-hover {
+  background-color: #F1F5F9 !important;
+}
+
+.ant-table-tbody > tr > td:has([data-type="numeric"]),
+.table-condensed td:has(.text-right) {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+.ant-table-cell,
+.table-condensed td {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}

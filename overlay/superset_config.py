@@ -94,7 +94,166 @@ TALISMAN_CONFIG = {
 }
 
 # ---------------------------------------------------------------------------
-# 6. Extensibility Pattern: Environment-Driven Configuration Hooks
+# 6. Design System & Corporate Theming (Subisu Cablenet)
+# ---------------------------------------------------------------------------
+# Authenticated against official Subisu brand identity (subisu.net.np):
+# Primary Brand: #1D479B (Subisu Cobalt Blue - .component-tile-primary / .su-text-primary)
+# Secondary Brand: #C12161 (Subisu Crimson Berry - .component-tile-secondary / .su-text-secondary)
+# Signature Gradient: linear-gradient(90deg, #1D479B, #C12161)
+# ---------------------------------------------------------------------------
+
+THEME_DEFAULT = {
+    "token": {
+        # Core Brand Palette (Subisu Official Website Colors)
+        "colorPrimary": "#1D479B",          # Subisu Primary Cobalt Blue
+        "colorPrimaryHover": "#2A5FBF",
+        "colorPrimaryActive": "#143270",
+        "colorPrimaryBg": "#EEF3FA",        # Subtle brand tint
+        "colorPrimaryBorder": "#BDD1F2",
+
+        # Semantic Status Tokens
+        "colorSuccess": "#28A745",          # Active / Renewals / Upgrades
+        "colorSuccessBg": "#EAF7ED",
+        "colorError": "#DC3545",            # Churn / Downgrade / Drop
+        "colorErrorBg": "#FDF2F2",
+        "colorWarning": "#F59E0B",          # Expiring / Threshold
+        "colorWarningBg": "#FFFBEB",
+        "colorInfo": "#17A2B8",             # Broadband info / Cyan
+        "colorInfoBg": "#EDF9FA",
+
+        # Neutral & Background Hierarchy
+        "colorBgBase": "#FFFFFF",
+        "colorBgLayout": "#F8F9FA",        # Clean enterprise surface
+        "colorBgContainer": "#FFFFFF",
+        "colorBgElevated": "#FFFFFF",
+        "colorBorder": "#E2E8F0",          # 1px crisp borders
+        "colorBorderSecondary": "#F1F5F9",
+
+        # Typography Hierarchy
+        "colorText": "#0C0C0C",            # Subisu .su-text-black
+        "colorTextSecondary": "#495057",   # Subisu slate secondary
+        "colorTextTertiary": "#6C757D",    # Subisu muted caption
+        "colorTextQuaternary": "#CED4DA",
+        "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+        "fontSize": 13,
+        "fontSizeHeading1": 24,
+        "fontSizeHeading2": 20,
+        "fontSizeHeading3": 16,
+        "fontSizeHeading4": 14,
+
+        # Geometry & Spacing (8px Grid, 12px Radius)
+        "borderRadius": 8,
+        "borderRadiusLG": 12,
+        "borderRadiusSM": 6,
+        "boxShadow": "0 1px 3px 0 rgba(12, 12, 12, 0.05), 0 1px 2px -1px rgba(12, 12, 12, 0.05)",
+        "boxShadowSecondary": "0 4px 6px -1px rgba(12, 12, 12, 0.07), 0 2px 4px -2px rgba(12, 12, 12, 0.05)",
+        "wireframe": False,
+    },
+    "components": {
+        "Tabs": {
+            "cardBg": "#FFFFFF",
+            "horizontalItemPadding": "10px 16px",
+            "itemSelectedColor": "#1D479B",
+            "itemHoverColor": "#2A5FBF",
+            "inkBarColor": "#1D479B",
+            "titleFontSize": 13,
+            "horizontalMargin": "0 0 16px 0",
+        },
+        "Table": {
+            "headerBg": "#F8F9FA",
+            "headerColor": "#495057",
+            "headerSplitColor": "transparent",
+            "rowHoverBg": "#F1F5F9",
+            "borderColor": "#E2E8F0",
+            "fontSize": 12,
+            "cellPaddingBlock": 8,
+            "cellPaddingInline": 12,
+        },
+        "Button": {
+            "borderRadius": 8,
+            "controlHeight": 34,
+            "fontWeight": 600,
+        },
+        "Select": {
+            "controlHeight": 34,
+            "borderRadius": 8,
+            "colorBorder": "#CED4DA",
+        },
+        "Card": {
+            "borderRadiusLG": 12,
+            "headerBg": "#FFFFFF",
+            "headerFontSize": 14,
+            "colorBorderSecondary": "#E2E8F0",
+        },
+    },
+}
+
+# Corporate Chart Color Palettes (Derived directly from Subisu brand architecture)
+EXTRA_CATEGORICAL_COLOR_SCHEMES = [
+    {
+        "id": "subisu_brand_categorical",
+        "description": "Subisu Cabelenet Official Brand Palette (Cobalt Blue & Crimson Berry)",
+        "label": "Subisu Enterprise Categorical",
+        "isDefault": True,
+        "colors": [
+            "#1D479B",  # 1. Subisu Cobalt Blue (Primary brand)
+            "#C12161",  # 2. Subisu Crimson Berry (Secondary brand)
+            "#007BFF",  # 3. Subisu Sky Blue (Digital services)
+            "#28A745",  # 4. Success Green (Renewals / Active)
+            "#FD7E14",  # 5. ClearTV Orange (Digital TV / Entertainment)
+            "#17A2B8",  # 6. Broadband Teal/Cyan (FTTH Internet)
+            "#6F42C1",  # 7. Enterprise Purple (SME & Corporate)
+            "#FFC107",  # 8. Amber Gold (Expiring / Notice)
+            "#E83E8C",  # 9. Vibrant Pink (Promotions & Value packs)
+            "#6C757D",  # 10. Slate Neutral (Others / Unclassified)
+        ],
+    }
+]
+
+EXTRA_SEQUENTIAL_COLOR_SCHEMES = [
+    {
+        "id": "subisu_blue_sequential",
+        "description": "Subisu Official Cobalt Blue Sequential for volume & ARPU density",
+        "label": "Subisu Cobalt Sequential",
+        "isDefault": True,
+        "isDiverging": False,
+        "colors": [
+            "#EEF3FA",  # Lightest tint
+            "#D8E4F4",
+            "#B6CDE9",
+            "#8DAFDC",
+            "#5D8ECD",
+            "#3A72BE",
+            "#1D479B",  # Core Subisu Blue
+            "#16387D",
+            "#10295F",
+            "#0A1B40",  # Deepest Midnight Navy
+        ],
+    },
+    {
+        "id": "subisu_diverging_delta",
+        "description": "Subisu Red-Slate-Green for ARPU growth, revenue shifts & deltas",
+        "label": "Subisu Diverging Growth Delta",
+        "isDefault": False,
+        "isDiverging": True,
+        "colors": [
+            "#DC3545",  # Negative / Churn (-100%)
+            "#F18A94",
+            "#FACDCE",
+            "#F8F9FA",  # Neutral / Zero change (0.00)
+            "#C4E7CB",
+            "#63BE7B",
+            "#28A745",  # Positive / Upgrade (+100%)
+        ],
+    },
+]
+
+# Instance-wide Default Palette Directives
+DEFAULT_CATEGORICAL_COLOR_SCHEME = "subisu_brand_categorical"
+DEFAULT_SEQUENTIAL_COLOR_SCHEME = "subisu_blue_sequential"
+
+# ---------------------------------------------------------------------------
+# 7. Extensibility Pattern: Environment-Driven Configuration Hooks
 # ---------------------------------------------------------------------------
 # Any future feature, optimization, or integration must be gated by a condition
 # checking an environment variable or feature flag before modifying runtime state.
