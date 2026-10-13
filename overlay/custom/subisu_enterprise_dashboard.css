@@ -617,3 +617,83 @@
   transform: translateY(-1px) !important;
   box-shadow: 0 2px 6px rgba(29, 71, 155, 0.08) !important;
 }
+
+/* ==========================================================================
+   10. CONSOLIDATED KPIS & EXECUTIVE METRICS BRIDGE
+   ========================================================================== */
+/* Tab 7 Executive Consolidated Metrics Table */
+[data-test-chart-name="Executive Consolidated Metrics Summary"] .ant-table,
+.dashboard-component-chart-holder:has([data-test-chart-name="Executive Consolidated Metrics Summary"]) .ant-table {
+  border-radius: var(--sb-radius-md) !important;
+  font-size: 12.5px !important;
+}
+
+[data-test-chart-name="Executive Consolidated Metrics Summary"] .ant-table-thead > tr > th,
+.dashboard-component-chart-holder:has([data-test-chart-name="Executive Consolidated Metrics Summary"]) .ant-table-thead > tr > th {
+  background-color: #F8F9FA !important;
+  color: #495057 !important;
+  font-weight: 700 !important;
+  font-size: 11.5px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  padding: 10px 14px !important;
+}
+
+[data-test-chart-name="Executive Consolidated Metrics Summary"] .ant-table-tbody > tr > td,
+.dashboard-component-chart-holder:has([data-test-chart-name="Executive Consolidated Metrics Summary"]) .ant-table-tbody > tr > td {
+  padding: 11px 14px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+  font-size: 12.5px !important;
+}
+
+/* Metric Category Description: Bold Brand Blue */
+[data-test-chart-name="Executive Consolidated Metrics Summary"] .ant-table-tbody > tr > td:nth-child(1),
+.dashboard-component-chart-holder:has([data-test-chart-name="Executive Consolidated Metrics Summary"]) .ant-table-tbody > tr > td:nth-child(1) {
+  font-weight: 700 !important;
+  color: var(--sb-primary) !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Prior Baseline: Slate Neutral & Monospace */
+[data-test-chart-name="Executive Consolidated Metrics Summary"] .ant-table-tbody > tr > td:nth-child(2),
+.dashboard-component-chart-holder:has([data-test-chart-name="Executive Consolidated Metrics Summary"]) .ant-table-tbody > tr > td:nth-child(2) {
+  font-weight: 600 !important;
+  color: #64748B !important;
+  font-variant-numeric: tabular-nums !important;
+  text-align: right !important;
+}
+
+/* Current Plan: Bold Dark & Monospace */
+[data-test-chart-name="Executive Consolidated Metrics Summary"] .ant-table-tbody > tr > td:nth-child(3),
+.dashboard-component-chart-holder:has([data-test-chart-name="Executive Consolidated Metrics Summary"]) .ant-table-tbody > tr > td:nth-child(3) {
+  font-weight: 700 !important;
+  color: var(--sb-text-title) !important;
+  font-variant-numeric: tabular-nums !important;
+  text-align: right !important;
+}
+
+/* Net Delta: Bold Brand Blue & Monospace */
+[data-test-chart-name="Executive Consolidated Metrics Summary"] .ant-table-tbody > tr > td:nth-child(4),
+.dashboard-component-chart-holder:has([data-test-chart-name="Executive Consolidated Metrics Summary"]) .ant-table-tbody > tr > td:nth-child(4) {
+  font-weight: 700 !important;
+  color: var(--sb-primary) !important;
+  font-variant-numeric: tabular-nums !important;
+  text-align: right !important;
+}
+
+/* Growth Lift (%): Semantic Green Status */
+[data-test-chart-name="Executive Consolidated Metrics Summary"] .ant-table-tbody > tr > td:nth-child(5),
+.dashboard-component-chart-holder:has([data-test-chart-name="Executive Consolidated Metrics Summary"]) .ant-table-tbody > tr > td:nth-child(5) {
+  font-weight: 700 !important;
+  color: var(--sb-positive) !important;
+  font-variant-numeric: tabular-nums !important;
+  text-align: center !important;
+  background-color: #EAF7ED !important;
+}
+
+/* Revenue & Run-Rate Expansion Bridge Chart card styling */
+[data-test-chart-name="Revenue & Run-Rate Expansion Bridge"] .echarts-for-react,
+.dashboard-component-chart-holder:has([data-test-chart-name="Revenue & Run-Rate Expansion Bridge"]) {
+  min-height: 380px !important;
+}
+
